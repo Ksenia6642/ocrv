@@ -2,6 +2,7 @@ import random
 
 
 def num2text(num, len_num=3):
+    ''' Число типа int превращает в строку с числительным'''
     dict = {0: 'ноль', 1: 'один', 2: 'два', 3: 'три', 4: 'четыре', 5: 'пять', 6: 'шесть',
             7: 'семь', 8: 'восемь', 9: 'девять', 10: 'десять', 11: 'одинадцать', 12: 'двенядцать',
             13: 'тринадцать', 14: 'четырнадцать', 15: 'пятнадцать', 16: 'шестнадцать',
@@ -21,8 +22,9 @@ def num2text(num, len_num=3):
     return ' '.join(res)
 
 
-def test_system(output_file_name='output.txt', test_file_name='tests.txt', verdict_file_name='verdict.txt'):
-    test = open(test_file_name, 'r')
+def test_system(output_file_name='output.txt', tests_file_name='tests.txt', verdict_file_name='verdict.txt'):
+    ''' Тестирующая система '''
+    test = open(tests_file_name, 'r')
     output = open(output_file_name, 'r')
     verdict = open(verdict_file_name, 'w')
     total_verdict = True
@@ -48,9 +50,9 @@ def test_system(output_file_name='output.txt', test_file_name='tests.txt', verdi
     verdict.close()
 
 
-def create_tests(count=50, test_file_name='tests.txt'):
-
-    test = open(test_file_name, 'w')
+def create_tests(count=50, tests_file_name='tests.txt'):
+    ''' Создает текстовый файл с тестами '''
+    test = open(tests_file_name, 'w')
     for i in range(count):
         num1 = random.randint(0, 999)
         num2 = random.randint(0, 99)

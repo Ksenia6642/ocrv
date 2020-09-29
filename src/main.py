@@ -1,8 +1,9 @@
+import os
 from tests.test_system import create_tests, test_system
 
 
 def text2num(string):
-    """Преобразовывает число строкового представления в число с типом int"""
+    """Преобразовывает числительное строкового представления в число с типом int"""
     dict = {'ноль': (0, 0), 'один': (1, 0), 'два': (2, 0), 'три': (3, 0), 'четыре': (4, 0), 'пять': (5, 0),
             'шесть': (6, 0), 'семь': (7, 0), 'восемь': (8, 0), 'девять': (9, 0), 'десять': (10, 1),
             'одинадцать': (11, 1),
@@ -42,15 +43,19 @@ if __name__ == "__main__":
     tests_file_name = 'tests.txt'
     output_file_name = 'output.txt'
     verdict_file_name = 'verdict.txt'
-    create_tests(test_file_name=f'tests/{tests_file_name}', count=15000)
-    tests = open(f'tests/{tests_file_name}', 'r')
-    output = open(f'build/{output_file_name}', 'w')
+    # создаем файл с тестами
+    create_tests(tests_file_name=f'src/tests/{tests_file_name}', count=15000) 
+    tests = open(f'src/tests/{tests_file_name}', 'r')
+    if not os.path.exists('src/build'):
+        os.mkdir('src/build')
+    output = open(f'src/build/{output_file_name}', 'w')
     for i in tests:
         string = i.rstrip('\n').split('_')[1]
+        # записываем в файл результат функции text2num
         output.write(
             f"{text2num(string.split('/')[0])} {text2num(string.split('/')[1])} {text2num(string.split('/')[2])}" + "\n")
-
-    test_system(output_file_name=f'build/{output_file_name}',
-                test_file_name=f'tests/{tests_file_name}', verdict_file_name=f'tests/{verdict_file_name}')
+    # запускаем тестирующую систему
+    test_system(output_file_name=f'src/build/{output_file_name}',
+                tests_file_name=f'src/tests/{tests_file_name}', verdict_file_name=f'src/tests/{verdict_file_name}')
     tests.close()
     output.close()

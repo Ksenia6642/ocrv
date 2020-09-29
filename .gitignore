@@ -1,2 +1,6 @@
-env
-__pycache__
+build
+tests.txt
+verdict.txt
+.vscode
+__pycache__/
+env/
